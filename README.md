@@ -1,5 +1,5 @@
 # SyncManPOC
-A Proof Of Concept for an mutithreaded application managed using JMX
+A Proof Of Concept for a multithreaded application managed using JMX
 
 SyncManager is a simple example of a multithreaded application with a remote interface using JMX.
 Using the url localhome:81 you can:

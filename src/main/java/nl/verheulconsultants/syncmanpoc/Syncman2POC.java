@@ -55,8 +55,6 @@ public class Syncman2POC {
         ObjectName adapterName;
 
         try {
-//            ObjectName serverName = new ObjectName("nl.verheulconsultants.manage.jmx:name=WebAdministratorServer,type=HtmlAdaptorServer");
-//            mbs.registerMBean(adapter, serverName);
             // Uniquely identify the MBeans and register them with the MBeanServer 
             registerName = new ObjectName("Syncman2POC:name=set speed");
             mbs.registerMBean(interval, registerName);
