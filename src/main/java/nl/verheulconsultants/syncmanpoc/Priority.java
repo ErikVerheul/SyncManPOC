@@ -6,6 +6,7 @@
 package nl.verheulconsultants.syncmanpoc;
 
 import edu.umd.cs.findbugs.annotations.SuppressWarnings;
+import java.util.logging.Logger;
 
 /**
  * Class Priority
@@ -14,20 +15,35 @@ import edu.umd.cs.findbugs.annotations.SuppressWarnings;
  */
 public class Priority implements PriorityMBean {
 
-    private int maxPriority = 1;
-    private int minPriority = 10;
-    private int priorities[] = new int[Syncman2POC.aantalRegios];
+    private final int maxPriority = 1;
+    private final int minPriority = 10;
+    private final int priorities[] = new int[Syncman2POC.aantalRegios];
 
+    /**
+     *
+     */
     public Priority() {
         for (int i = 0; i < priorities.length; i++) {
             priorities[i] = maxPriority - 1;
         }
     }
 
+    /**
+     *
+     * @param region
+     * @return
+     */
     protected int getPriority(int region) {
         return priorities[region];
     }
 
+    /**
+     *
+     * @param region
+     * @param prio
+     * @throws IllegalArgumentException
+     */
+    @Override
     public void setPriority(int region, int prio) throws IllegalArgumentException {
         if (region < 1 || region > Syncman2POC.aantalRegios) {
             throw new IllegalArgumentException("Region range must be >= 1 and <= " + Syncman2POC.aantalRegios);
@@ -38,7 +54,12 @@ public class Priority implements PriorityMBean {
         priorities[region - 1] = prio - 1;
     }
 
+    /**
+     *
+     * @return
+     */
     @SuppressWarnings("SBSC_USE_STRINGBUFFER_CONCATENATION")
+    @Override
     public String showPriorities() {
         String s = "Set priorities<br>";
         for (int i = 0; i < priorities.length; i++) {
@@ -46,6 +67,7 @@ public class Priority implements PriorityMBean {
         }
         return s;
     }
+    private static final Logger LOG = Logger.getLogger(Priority.class.getName());
 }
 
 

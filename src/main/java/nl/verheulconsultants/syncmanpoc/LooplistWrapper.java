@@ -6,7 +6,8 @@
 package nl.verheulconsultants.syncmanpoc;
 
 import edu.umd.cs.findbugs.annotations.SuppressWarnings;
-import java.util.*;
+import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Class LooplistWrapper is a wrapper around the List of MessageLoop instances.
@@ -19,10 +20,19 @@ public class LooplistWrapper implements LooplistWrapperMBean {
 
     private final List<MessageLoop> loops;
 
+    /**
+     *
+     * @param loops
+     */
     public LooplistWrapper(List loops) {
         this.loops = loops;
     }
 
+    /**
+     *
+     * @param region
+     * @throws IllegalArgumentException
+     */
     @Override
     public void suspendRegion(int region) throws IllegalArgumentException {
         if (region < 1 || region > loops.size() || loops.get(region - 1).isSuspended()) {
@@ -31,6 +41,11 @@ public class LooplistWrapper implements LooplistWrapperMBean {
         loops.get(region - 1).suspend();
     }
 
+    /**
+     *
+     * @param region
+     * @throws IllegalArgumentException
+     */
     @Override
     public void resumeRegion(int region) throws IllegalArgumentException {
         if (region < 1 || region > loops.size() || !loops.get(region - 1).isSuspended()) {
@@ -39,6 +54,10 @@ public class LooplistWrapper implements LooplistWrapperMBean {
         loops.get(region - 1).resume();
     }
 
+    /**
+     *
+     * @return
+     */
     @SuppressWarnings("SBSC_USE_STRINGBUFFER_CONCATENATION")
     @Override
     public String showSuspended() {
@@ -51,6 +70,10 @@ public class LooplistWrapper implements LooplistWrapperMBean {
         return s;
     }
 
+    /**
+     *
+     * @return
+     */
     @SuppressWarnings("SBSC_USE_STRINGBUFFER_CONCATENATION")
     @Override
     public String showActive() {
@@ -62,6 +85,7 @@ public class LooplistWrapper implements LooplistWrapperMBean {
         }
         return s;
         }
+    private static final Logger LOG = Logger.getLogger(LooplistWrapper.class.getName());
     }
 
 

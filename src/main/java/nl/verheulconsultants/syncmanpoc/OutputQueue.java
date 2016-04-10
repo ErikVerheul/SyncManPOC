@@ -4,8 +4,10 @@
  */
 package nl.verheulconsultants.syncmanpoc;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Iterator;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,12 +16,19 @@ import java.util.concurrent.*;
 public class OutputQueue {
 
     private int size = 10;
-    private int maxSize = 1000;
+    private final int maxSize = 1000;
     BlockingQueue<String> queue = new LinkedBlockingQueue();
 
+    /**
+     *
+     */
     public OutputQueue() {
     }
 
+    /**
+     *
+     * @param size
+     */
     public OutputQueue(int size) {
         if (size > 0 && size <= maxSize) {
             this.size = size;
@@ -32,6 +41,11 @@ public class OutputQueue {
         }
     }
 
+    /**
+     *
+     * @param newSize
+     * @throws IllegalArgumentException
+     */
     public void setSize(int newSize) throws IllegalArgumentException {
         if (newSize <= 0 || newSize > maxSize) {
             throw new IllegalArgumentException("Output lines range must be >= 1 and <= " + maxSize);
@@ -40,10 +54,18 @@ public class OutputQueue {
         trimSize(size);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     *
+     * @param s
+     */
     public void add(String s) {
         while (queue.size() >= size) {
             queue.remove();
@@ -55,6 +77,10 @@ public class OutputQueue {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAll() {
         StringBuilder buf = new StringBuilder(10000);
         Iterator<String> it = queue.iterator();
@@ -64,4 +90,5 @@ public class OutputQueue {
         }
         return buf.toString();
     }
+    private static final Logger LOG = Logger.getLogger(OutputQueue.class.getName());
 }

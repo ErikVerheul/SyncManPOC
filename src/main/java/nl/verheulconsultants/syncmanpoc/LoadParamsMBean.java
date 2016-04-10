@@ -13,14 +13,34 @@ package nl.verheulconsultants.syncmanpoc;
  */
 public interface LoadParamsMBean
 {
+
+    /**
+     *
+     */
     public void setDefaultdLoad();
     
+    /**
+     *
+     * @param fixedLoad
+     */
     public void setFixedLoad(int fixedLoad);
     
+    /**
+     *
+     * @param randomLoad
+     */
     public void setRandomLoad(int randomLoad);
     
+    /**
+     *
+     * @return
+     */
     public int getFixedLoad();
     
+    /**
+     *
+     * @return
+     */
     public int getRandomLoad();        
 }
 

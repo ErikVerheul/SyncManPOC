@@ -11,7 +11,15 @@ package nl.verheulconsultants.syncmanpoc;
  */
 public interface IntervalMBean {
 
+    /**
+     *
+     * @param waitMilis
+     */
     public void setInterval(long waitMilis);
 
+    /**
+     *
+     * @return
+     */
     public long getInterval();
 }

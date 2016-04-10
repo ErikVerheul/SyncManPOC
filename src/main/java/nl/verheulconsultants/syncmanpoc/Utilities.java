@@ -2,18 +2,9 @@ package nl.verheulconsultants.syncmanpoc;
 
 import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 
-/**
- * class Utilities is a set of static methods.
- *
- * @author erik
- */
+
 public class Utilities {
 
-    /* Display a message, preceded by the name of the current thread */
-    public static void threadMessage(String message) {
-        String threadName = Thread.currentThread().getName();
-        System.out.format("%s: %s%n", threadName, message);
-    }
 
     /* These variables are initiated once only at class loading.
      * lastFired is the point in time when the simulated processing came to an end
@@ -22,6 +13,12 @@ public class Utilities {
      */
     private static long lastFired = System.currentTimeMillis();
     private static long now = System.currentTimeMillis();
+    /* Display a message, preceded by the name of the current thread */
+    public static void threadMessage(String message) {
+        String threadName = Thread.currentThread().getName();
+        System.out.format("%s: %s%n", threadName, message);
+    }
+
     /*
      * timeOut sleeps the period waitMillis or not at all when that time has passed (> now - lastFired).
      * The timeout time should be interval time * number of running threads minus procTime or 0 if negative.
@@ -34,15 +31,16 @@ public class Utilities {
      * Note that the value of variable lastFired is saved between calls of this method.
      * The timeOut method is synchronized to force multiple threads calling this method to be serialized.
      */
-    @SuppressWarnings("SWL_SLEEP_WITH_LOCK_HELD")
-    synchronized public static TimerResult timeOut(long procTime, long waitMillis) {
+    @SuppressWarnings(value = "SWL_SLEEP_WITH_LOCK_HELD")
+    public static synchronized TimerResult timeOut(long procTime, long waitMillis) {
         now = System.currentTimeMillis();
-        long elapsed = 0;
+        long elapsed;
         long idleTime = 0;
         if (now - lastFired < waitMillis) {
             try {
                 idleTime = lastFired + waitMillis - now;
-                Thread.sleep(idleTime); //It is the intention to sleep with the lock held to simulatie a busy process.
+                //It is the intention to sleep with the lock held to simulatie a busy process.
+                Thread.sleep(idleTime); 
             } catch (InterruptedException e) {
                 Utilities.threadMessage("SyncTimer.timeOut was interrupted! " + e);
             }

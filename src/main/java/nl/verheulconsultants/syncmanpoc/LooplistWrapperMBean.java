@@ -12,12 +12,28 @@ package nl.verheulconsultants.syncmanpoc;
  */
 public interface LooplistWrapperMBean {
 
+    /**
+     *
+     * @param region
+     */
     public void suspendRegion(int region);
 
+    /**
+     *
+     * @param region
+     */
     public void resumeRegion(int region);
 
+    /**
+     *
+     * @return
+     */
     public String showSuspended();
 
+    /**
+     *
+     * @return
+     */
     public String showActive();
 }
 

@@ -5,6 +5,7 @@
 package nl.verheulconsultants.syncmanpoc;
 
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  * For an explanation of the suspend / resume implementation see
@@ -22,7 +23,7 @@ class MessageLoop implements Runnable {
     private final Random r = new Random();
     private TimerResult tr = null;
 
-    public MessageLoop(int region, Interval intervalMBean, Priority priorities, LoadParams params, OutputQueue outputQueue) {
+    MessageLoop(int region, Interval intervalMBean, Priority priorities, LoadParams params, OutputQueue outputQueue) {
         this.region = region;
         this.interval = intervalMBean;
         this.priorities = priorities;
@@ -110,6 +111,7 @@ class MessageLoop implements Runnable {
         return Utilities.timeOut(procTime, interval.getInterval());
     }
 
+    @Override
     public void run() {
         MessageSupplier ms = new MessageSupplier();
         while (true) {
@@ -125,4 +127,5 @@ class MessageLoop implements Runnable {
             Utilities.threadMessage(out);
         }
     }
+    private static final Logger LOG = Logger.getLogger(MessageLoop.class.getName());
 }

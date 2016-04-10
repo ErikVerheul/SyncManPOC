@@ -8,13 +8,32 @@ package nl.verheulconsultants.syncmanpoc;
  */
 import com.sun.jdmk.comm.AuthInfo;
 import com.sun.jdmk.comm.HtmlAdaptorServer;
-import javax.management.*;
-import java.lang.management.*;
-import java.util.*;
+import java.lang.management.ManagementFactory;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.management.InstanceAlreadyExistsException;
+import javax.management.MBeanRegistrationException;
+import javax.management.MBeanServer;
+import javax.management.MalformedObjectNameException;
+import javax.management.NotCompliantMBeanException;
+import javax.management.ObjectName;
 
+/**
+ *
+ * @author Erik
+ */
 public class Syncman2POC {
 
     protected final static int aantalRegios = 25;
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        new Syncman2POC();
+    }
     private final List<MessageLoop> looplist = new ArrayList();
     private MBeanServer mbs = null;
     private Interval interval = null;
@@ -24,27 +43,11 @@ public class Syncman2POC {
     private LoadParams params = null;
     private final OutputQueue outputQueue = new OutputQueue();
 
-    /**
-     * Start a thread for each region. All threads refer to the same one and only instances of Interval, Priority, LoadParams and OutputQueue. A change
-     * introduced with JMX to such an instance is applicable to all threads.
-     * <aantalRegios> instances of MessageLoop are instantiated.
-     */
-    private void startThreads() {
-        for (int i = 0; i < aantalRegios; i++) {
-            MessageLoop loop = new MessageLoop(i, interval, priorities, params, outputQueue);
-            looplist.add(loop);
-            Thread t = new Thread(loop);
-            t.setName("Region " + (i + 1));
-            t.start();
-        }
-    }
-
     private Syncman2POC() {
         // Create an MBeanServer and HTML adaptor (J2SE 1.5)
         mbs = ManagementFactory.getPlatformMBeanServer();
         HtmlAdaptorServer adapter = new HtmlAdaptorServer(81);
         adapter.addUserAuthenticationInfo(new AuthInfo("Erik", "Verheul"));
-
         // Unique identification of MBeans
         interval = new Interval();
         loops = new LooplistWrapper(looplist);
@@ -53,7 +56,6 @@ public class Syncman2POC {
         params = new LoadParams();
         ObjectName registerName;
         ObjectName adapterName;
-
         try {
             // Uniquely identify the MBeans and register them with the MBeanServer 
             registerName = new ObjectName("Syncman2POC:name=set speed");
@@ -71,16 +73,25 @@ public class Syncman2POC {
             mbs.registerMBean(adapter, adapterName);
             adapter.start();
         } catch (MalformedObjectNameException | InstanceAlreadyExistsException | MBeanRegistrationException | NotCompliantMBeanException e) {
-            e.printStackTrace();
+            LOG.log(Level.ALL, "Exception while registering MBeans: ", e);
         }
         System.out.println("Syncmanager2 Proof Of Concept is running...");
         startThreads();
     }
 
     /**
-     * @param args the command line arguments
+     * Start a thread for each region. All threads refer to the same one and only instances of Interval, Priority, LoadParams and OutputQueue. A change
+     * introduced with JMX to such an instance is applicable to all threads.
+     * <aantalRegios> instances of MessageLoop are instantiated.
      */
-    public static void main(String[] args) {
-        new Syncman2POC();
+    private void startThreads() {
+        for (int i = 0; i < aantalRegios; i++) {
+            MessageLoop loop = new MessageLoop(i, interval, priorities, params, outputQueue);
+            looplist.add(loop);
+            Thread t = new Thread(loop);
+            t.setName("Region " + (i + 1));
+            t.start();
+        }
     }
+    private static final Logger LOG = Logger.getLogger(Syncman2POC.class.getName());
 }

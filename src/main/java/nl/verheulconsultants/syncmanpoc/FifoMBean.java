@@ -12,10 +12,22 @@ package nl.verheulconsultants.syncmanpoc;
  */
 public interface FifoMBean {
 
+    /**
+     *
+     * @param size
+     */
     public void setSize(int size);
 
+    /**
+     *
+     * @return
+     */
     public int getSize();
 
+    /**
+     *
+     * @return
+     */
     public String showOutput();
 }
 

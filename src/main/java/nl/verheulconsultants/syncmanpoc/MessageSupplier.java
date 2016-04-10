@@ -4,6 +4,8 @@
  */
 package nl.verheulconsultants.syncmanpoc;
 
+import java.util.logging.Logger;
+
 /**
  *
  * @author ERIK
@@ -18,6 +20,10 @@ public class MessageSupplier {
         "A kid will eat ivy too"
     };
 
+    /**
+     *
+     * @return
+     */
     public String getNextMessage() {
         String s = dummyMessage[index];
         index++;
@@ -26,4 +32,5 @@ public class MessageSupplier {
         }
         return s;
     }
+    private static final Logger LOG = Logger.getLogger(MessageSupplier.class.getName());
 }

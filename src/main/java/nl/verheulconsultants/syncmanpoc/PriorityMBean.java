@@ -13,8 +13,18 @@ package nl.verheulconsultants.syncmanpoc;
  */
 public interface PriorityMBean
 {    
+
+    /**
+     *
+     * @param region
+     * @param prio
+     */
     public void setPriority(int region, int prio);
     
+    /**
+     *
+     * @return
+     */
     public String showPriorities();
 }
 
