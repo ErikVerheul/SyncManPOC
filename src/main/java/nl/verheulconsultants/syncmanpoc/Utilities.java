@@ -5,7 +5,6 @@ import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 
 public class Utilities {
 
-
     /* These variables are initiated once only at class loading.
      * lastFired is the point in time when the simulated processing came to an end
      * and the result is (imaginary) send to the Personenserver. The time between two

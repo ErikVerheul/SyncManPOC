@@ -5,6 +5,26 @@
     <artifactId>SyncMan2POC</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <organization>
+        <name>Verheul Consultants</name>
+        <url>verheulconsultants.nl</url>
+    </organization>
+    <name>SyncMan2POC</name>
+    <url>https://github.com/ErikVerheul/SyncManPOC</url>
+    
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <!-- [Erik] see http://docs.sonarqube.org/display/SONAR/Analyzing+with+SonarQube+Scanner+for+Maven -->
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>3.0.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    
     <dependencies>
         <dependency>
             <groupId>org.jvnet.opendmk</groupId>
@@ -28,5 +48,5 @@
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
-    <name>SyncMan2POC</name>
+
 </project>
