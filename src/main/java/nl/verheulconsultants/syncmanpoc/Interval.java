@@ -22,7 +22,7 @@ public class Interval implements IntervalMBean {
 
     private long interval;
     private static final long MIN_INTERVAL = 100;
-    private final static long MAX_INTERVAL = 10_000;
+    private static final long MAX_INTERVAL = 10_000;
 
     /**
      *

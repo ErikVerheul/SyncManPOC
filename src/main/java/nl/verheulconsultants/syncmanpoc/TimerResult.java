@@ -12,9 +12,12 @@ import java.util.logging.Logger;
  */
 public class TimerResult {
     private static final Logger LOG = Logger.getLogger(TimerResult.class.getName());
-    long procTime;      // the duration of the simulated processing
-    long sleepTime;     // sleep time calculated in last timeout in ms.
-    long elapsedTime;   // time passed since last timeout in ms.
+    // the duration of the simulated processing
+    long procTime;
+    // sleep time calculated in last timeout in ms.
+    long sleepTime;
+    // time passed since last timeout in ms.
+    long elapsedTime;   
     
     /**
      *

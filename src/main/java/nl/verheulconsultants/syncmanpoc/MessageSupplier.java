@@ -14,7 +14,7 @@ public class MessageSupplier {
     private static final Logger LOG = Logger.getLogger(MessageSupplier.class.getName());
 
     int index = 0;
-    String dummyMessage[] = {
+    String[] dummyMessage = {
         "Mares eat oats",
         "Does eat oats",
         "Little lambs eat ivy",

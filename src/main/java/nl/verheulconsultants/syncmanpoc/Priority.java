@@ -18,7 +18,7 @@ public class Priority implements PriorityMBean {
 
     private static final int MAX_PRIORITY = 1;
     private static final int MIN_PRIORITY = 10;
-    private static final int PRIORITIES[] = new int[Syncman2POC.NR_OF_REGIONS];
+    private static final int[] PRIORITIES = new int[Syncman2POC.NR_OF_REGIONS];
 
     /**
      *

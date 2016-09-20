@@ -33,7 +33,7 @@ class MessageLoop implements Runnable {
         this.outputQueue = outputQueue;
     }
 
-    public synchronized void suspend() { // findbugs asked to synchronized
+    public synchronized void suspend() {
         suspended = true;
     }
 
@@ -44,7 +44,7 @@ class MessageLoop implements Runnable {
         }
     }
 
-    public synchronized boolean isSuspended() { // findbugs asked to synchronized
+    public synchronized boolean isSuspended() {
         return suspended;
     }
 

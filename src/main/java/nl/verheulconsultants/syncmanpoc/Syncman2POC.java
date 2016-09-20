@@ -30,7 +30,7 @@ public class Syncman2POC {
     /**
      *
      */
-    protected final static int NR_OF_REGIONS = 25;
+    protected static final int NR_OF_REGIONS = 25;
     private static final Logger LOG = Logger.getLogger(Syncman2POC.class.getName());
 
     /**
