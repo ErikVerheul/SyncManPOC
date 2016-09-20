@@ -2,9 +2,10 @@ package nl.verheulconsultants.syncmanpoc;
 
 /**
  * Note that the JMX output of this application is optimized for web access.
- * When needed <br> line breaks are added.
- * Note that the port number to access the application is changed to 81
- * @author erik
+ * When needed <br> line breaks are added. Note that the port number to access
+ * the application is changed to 81
+ *
+ * @author Erik Verheul
  */
 import com.sun.jdmk.comm.AuthInfo;
 import com.sun.jdmk.comm.HtmlAdaptorServer;
@@ -22,11 +23,15 @@ import javax.management.ObjectName;
 
 /**
  *
- * @author Erik
+ * @author Erik Verheul
  */
 public class Syncman2POC {
 
-    protected final static int aantalRegios = 25;
+    /**
+     *
+     */
+    protected final static int NR_OF_REGIONS = 25;
+    private static final Logger LOG = Logger.getLogger(Syncman2POC.class.getName());
 
     /**
      * @param args the command line arguments
@@ -52,7 +57,7 @@ public class Syncman2POC {
         interval = new Interval();
         loops = new LooplistWrapper(looplist);
         priorities = new Priority();
-        fifo  = new Fifo(outputQueue);
+        fifo = new Fifo(outputQueue);
         params = new LoadParams();
         ObjectName registerName;
         ObjectName adapterName;
@@ -80,12 +85,14 @@ public class Syncman2POC {
     }
 
     /**
-     * Start a thread for each region. All threads refer to the same one and only instances of Interval, Priority, LoadParams and OutputQueue. A change
-     * introduced with JMX to such an instance is applicable to all threads.
+     * Start a thread for each region. All threads refer to the same one and
+     * only instances of Interval, Priority, LoadParams and OutputQueue. A
+     * change introduced with JMX to such an instance is applicable to all
+     * threads.
      * <aantalRegios> instances of MessageLoop are instantiated.
      */
     private void startThreads() {
-        for (int i = 0; i < aantalRegios; i++) {
+        for (int i = 0; i < NR_OF_REGIONS; i++) {
             MessageLoop loop = new MessageLoop(i, interval, priorities, params, outputQueue);
             looplist.add(loop);
             Thread t = new Thread(loop);
@@ -93,5 +100,4 @@ public class Syncman2POC {
             t.start();
         }
     }
-    private static final Logger LOG = Logger.getLogger(Syncman2POC.class.getName());
 }

@@ -3,16 +3,14 @@
  *
  * Created on 17 januari 2008, 20:58
  */
-
 package nl.verheulconsultants.syncmanpoc;
 
 /**
  * Interface PriorityMBean
  *
- * @author erik
+ * @author Erik Verheul
  */
-public interface PriorityMBean
-{    
+public interface PriorityMBean {
 
     /**
      *
@@ -20,12 +18,10 @@ public interface PriorityMBean
      * @param prio
      */
     public void setPriority(int region, int prio);
-    
+
     /**
      *
      * @return
      */
     public String showPriorities();
 }
-
-

@@ -7,7 +7,7 @@ package nl.verheulconsultants.syncmanpoc;
 
 /**
  *
- * @author erik
+ * @author Erik Verheul
  */
 public interface IntervalMBean {
 

@@ -8,9 +8,10 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author erik
+ * @author Erik Verheul 
  */
 public class TimerResult {
+    private static final Logger LOG = Logger.getLogger(TimerResult.class.getName());
     long procTime;      // the duration of the simulated processing
     long sleepTime;     // sleep time calculated in last timeout in ms.
     long elapsedTime;   // time passed since last timeout in ms.
@@ -26,6 +27,5 @@ public class TimerResult {
         this.sleepTime = idleTime;
         this.elapsedTime = elapsedTime;
     }
-    private static final Logger LOG = Logger.getLogger(TimerResult.class.getName());
     
 }

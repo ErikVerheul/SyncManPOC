@@ -14,9 +14,10 @@ import java.util.logging.Logger;
  * Using a JMX client you can suspend and resume individual region processing.
  * The list op suspended and a list of active regions can be requested.
  *
- * @author erik
+ * @author Erik Verheul
  */
 public class LooplistWrapper implements LooplistWrapperMBean {
+    private static final Logger LOG = Logger.getLogger(LooplistWrapper.class.getName());
 
     private final List<MessageLoop> loops;
 
@@ -85,7 +86,6 @@ public class LooplistWrapper implements LooplistWrapperMBean {
         }
         return s;
         }
-    private static final Logger LOG = Logger.getLogger(LooplistWrapper.class.getName());
     }
 
 

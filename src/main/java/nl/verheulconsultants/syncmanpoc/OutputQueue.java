@@ -11,18 +11,20 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author erik
+ * @author Erik Verheul
  */
 public class OutputQueue {
+    private static final Logger LOG = Logger.getLogger(OutputQueue.class.getName());
 
     private int size = 10;
-    private final int maxSize = 1000;
+    private static final int MAX_SIZE = 1_000;
     BlockingQueue<String> queue = new LinkedBlockingQueue();
 
     /**
      *
      */
     public OutputQueue() {
+        // ToDo: Can this method be removed?
     }
 
     /**
@@ -30,7 +32,7 @@ public class OutputQueue {
      * @param size
      */
     public OutputQueue(int size) {
-        if (size > 0 && size <= maxSize) {
+        if (size > 0 && size <= MAX_SIZE) {
             this.size = size;
         }
     }
@@ -47,8 +49,8 @@ public class OutputQueue {
      * @throws IllegalArgumentException
      */
     public void setSize(int newSize) throws IllegalArgumentException {
-        if (newSize <= 0 || newSize > maxSize) {
-            throw new IllegalArgumentException("Output lines range must be >= 1 and <= " + maxSize);
+        if (newSize <= 0 || newSize > MAX_SIZE) {
+            throw new IllegalArgumentException("Output lines range must be >= 1 and <= " + MAX_SIZE);
         }
         size = newSize;
         trimSize(size);
@@ -82,7 +84,7 @@ public class OutputQueue {
      * @return
      */
     public String getAll() {
-        StringBuilder buf = new StringBuilder(10000);
+        StringBuilder buf = new StringBuilder(10_000);
         Iterator<String> it = queue.iterator();
         while (it.hasNext()) {
             buf.append(it.next());
@@ -90,5 +92,4 @@ public class OutputQueue {
         }
         return buf.toString();
     }
-    private static final Logger LOG = Logger.getLogger(OutputQueue.class.getName());
 }

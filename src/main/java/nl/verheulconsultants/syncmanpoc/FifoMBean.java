@@ -8,7 +8,7 @@ package nl.verheulconsultants.syncmanpoc;
 /**
  * Interface FifoMBean
  *
- * @author erik
+ * @author Erik Verheul
  */
 public interface FifoMBean {
 

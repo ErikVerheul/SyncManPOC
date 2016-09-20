@@ -8,7 +8,7 @@ package nl.verheulconsultants.syncmanpoc;
 /**
  * Interface LoopsMBean
  *
- * @author erik
+ * @author Erik Verheul
  */
 public interface LooplistWrapperMBean {
 

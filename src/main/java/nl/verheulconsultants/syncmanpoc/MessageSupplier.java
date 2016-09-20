@@ -8,9 +8,10 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author ERIK
+ * @author Erik Verheul
  */
 public class MessageSupplier {
+    private static final Logger LOG = Logger.getLogger(MessageSupplier.class.getName());
 
     int index = 0;
     String dummyMessage[] = {
@@ -32,5 +33,4 @@ public class MessageSupplier {
         }
         return s;
     }
-    private static final Logger LOG = Logger.getLogger(MessageSupplier.class.getName());
 }

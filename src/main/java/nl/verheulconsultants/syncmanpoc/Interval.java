@@ -9,7 +9,7 @@ import java.util.logging.Logger;
  *
  * Created on 11 december 2007, 15:19
  *
- * @author erik
+ * @author Erik Verheul
  */
 
 /**
@@ -18,16 +18,17 @@ import java.util.logging.Logger;
  */
 
 public class Interval implements IntervalMBean {
+    private static final Logger LOG = Logger.getLogger(Interval.class.getName());
 
     private long interval;
-    private final long minInterval = 100;
-    private final long maxInterval = 10000;
+    private static final long MIN_INTERVAL = 100;
+    private final static long MAX_INTERVAL = 10_000;
 
     /**
      *
      */
     public Interval() {
-        interval = 1000;
+        interval = 1_000;
     }
 
     /**
@@ -45,8 +46,8 @@ public class Interval implements IntervalMBean {
      */
     @Override
     public void setInterval(long waitMilis) throws IllegalArgumentException {
-        if (waitMilis < minInterval || waitMilis > maxInterval) {
-            throw new IllegalArgumentException("Interval range must be >= " + minInterval + " and <= " + maxInterval);
+        if (waitMilis < MIN_INTERVAL || waitMilis > MAX_INTERVAL) {
+            throw new IllegalArgumentException("Interval range must be >= " + MIN_INTERVAL + " and <= " + MAX_INTERVAL);
         }
         interval = waitMilis;
     }
@@ -59,7 +60,6 @@ public class Interval implements IntervalMBean {
     public long getInterval() {
         return interval;
     }
-    private static final Logger LOG = Logger.getLogger(Interval.class.getName());
 }
 
 

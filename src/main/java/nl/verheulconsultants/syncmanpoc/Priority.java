@@ -11,20 +11,21 @@ import java.util.logging.Logger;
 /**
  * Class Priority
  *
- * @author erik
+ * @author Erik Verheul
  */
 public class Priority implements PriorityMBean {
+    private static final Logger LOG = Logger.getLogger(Priority.class.getName());
 
-    private final int maxPriority = 1;
-    private final int minPriority = 10;
-    private final int priorities[] = new int[Syncman2POC.aantalRegios];
+    private static final int MAX_PRIORITY = 1;
+    private static final int MIN_PRIORITY = 10;
+    private static final int PRIORITIES[] = new int[Syncman2POC.NR_OF_REGIONS];
 
     /**
      *
      */
     public Priority() {
-        for (int i = 0; i < priorities.length; i++) {
-            priorities[i] = maxPriority - 1;
+        for (int i = 0; i < PRIORITIES.length; i++) {
+            PRIORITIES[i] = MAX_PRIORITY - 1;
         }
     }
 
@@ -34,7 +35,7 @@ public class Priority implements PriorityMBean {
      * @return
      */
     protected int getPriority(int region) {
-        return priorities[region];
+        return PRIORITIES[region];
     }
 
     /**
@@ -45,13 +46,13 @@ public class Priority implements PriorityMBean {
      */
     @Override
     public void setPriority(int region, int prio) throws IllegalArgumentException {
-        if (region < 1 || region > Syncman2POC.aantalRegios) {
-            throw new IllegalArgumentException("Region range must be >= 1 and <= " + Syncman2POC.aantalRegios);
+        if (region < 1 || region > Syncman2POC.NR_OF_REGIONS) {
+            throw new IllegalArgumentException("Region range must be >= 1 and <= " + Syncman2POC.NR_OF_REGIONS);
         }
-        if (prio < maxPriority || prio > minPriority) {
-            throw new IllegalArgumentException("Priority range must be >= " + maxPriority + " and <= " + minPriority);
+        if (prio < MAX_PRIORITY || prio > MIN_PRIORITY) {
+            throw new IllegalArgumentException("Priority range must be >= " + MAX_PRIORITY + " and <= " + MIN_PRIORITY);
         }
-        priorities[region - 1] = prio - 1;
+        PRIORITIES[region - 1] = prio - 1;
     }
 
     /**
@@ -62,12 +63,11 @@ public class Priority implements PriorityMBean {
     @Override
     public String showPriorities() {
         String s = "Set priorities<br>";
-        for (int i = 0; i < priorities.length; i++) {
-            s = s + "Region" + (i + 1) + ": priority= " + (priorities[i] + 1) + "<br>";
+        for (int i = 0; i < PRIORITIES.length; i++) {
+            s = s + "Region" + (i + 1) + ": priority= " + (PRIORITIES[i] + 1) + "<br>";
         }
         return s;
     }
-    private static final Logger LOG = Logger.getLogger(Priority.class.getName());
 }
 
 

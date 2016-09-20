@@ -6,9 +6,10 @@ import java.util.logging.Logger;
 /**
  * Class Fifo
  *
- * @author erik
+ * @author Erik Verheul
  */
 public class Fifo implements FifoMBean {
+    private static final Logger LOG = Logger.getLogger(Fifo.class.getName());
 
     OutputQueue outputQueue = null;
 
@@ -16,6 +17,7 @@ public class Fifo implements FifoMBean {
      *
      */
     public Fifo() {
+        //ToDo: can this method be removed?
     }
 
     /**
@@ -56,7 +58,6 @@ public class Fifo implements FifoMBean {
                 "Time elapsed = the actual time between the last 2 messages<br><br>";
         return comment + outputQueue.getAll();
     }
-    private static final Logger LOG = Logger.getLogger(Fifo.class.getName());
 }
 
 

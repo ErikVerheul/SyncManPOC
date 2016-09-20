@@ -2,8 +2,11 @@ package nl.verheulconsultants.syncmanpoc;
 
 import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 
-
-public class Utilities {
+/**
+ *
+ * @author Erik Verheul 
+ */
+class Utilities {
 
     /* These variables are initiated once only at class loading.
      * lastFired is the point in time when the simulated processing came to an end
@@ -13,6 +16,12 @@ public class Utilities {
     private static long lastFired = System.currentTimeMillis();
     private static long now = System.currentTimeMillis();
     /* Display a message, preceded by the name of the current thread */
+
+    /**
+     *
+     * @param message
+     */
+
     public static void threadMessage(String message) {
         String threadName = Thread.currentThread().getName();
         System.out.format("%s: %s%n", threadName, message);
@@ -30,6 +39,14 @@ public class Utilities {
      * Note that the value of variable lastFired is saved between calls of this method.
      * The timeOut method is synchronized to force multiple threads calling this method to be serialized.
      */
+
+    /**
+     *
+     * @param procTime
+     * @param waitMillis
+     * @return
+     */
+
     @SuppressWarnings(value = "SWL_SLEEP_WITH_LOCK_HELD")
     public static synchronized TimerResult timeOut(long procTime, long waitMillis) {
         now = System.currentTimeMillis();
@@ -48,5 +65,9 @@ public class Utilities {
         elapsed = now - lastFired;
         lastFired = now;
         return new TimerResult(procTime, idleTime, elapsed);
+    }
+
+    private Utilities() {
+        // prevent instantiation
     }
 }

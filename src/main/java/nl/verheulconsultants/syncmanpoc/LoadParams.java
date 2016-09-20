@@ -12,14 +12,15 @@ import java.util.logging.Logger;
  * period for the worker thread base on several paramaters. These parameters can
  * be changed using a JMX client.
  *
- * @author erik
+ * @author Erik Verheul
  */
 public final class LoadParams implements LoadParamsMBean {
+    private static final Logger LOG = Logger.getLogger(LoadParams.class.getName());
 
     private int fixedLoad;
     private int randomLoad;
-    private final int minFixedLoad = 0;
-    private final int minRandomLoad = 0;
+    private static final int MIN_FIXEDLOAD = 0;
+    private static final int MIN_RANDOMLOAD = 0;
 
     /**
      *
@@ -33,8 +34,8 @@ public final class LoadParams implements LoadParamsMBean {
      */
     @Override
     public void setDefaultdLoad() {
-        fixedLoad = 24300;
-        randomLoad = 1000;
+        fixedLoad = 24_300;
+        randomLoad = 1_000;
     }
 
     /**
@@ -44,8 +45,8 @@ public final class LoadParams implements LoadParamsMBean {
      */
     @Override
     public void setFixedLoad(int fixedLoad) throws IllegalArgumentException {
-        if (fixedLoad < minFixedLoad) {
-            throw new IllegalArgumentException("The fixed laod must be >=  " + minFixedLoad);
+        if (fixedLoad < MIN_FIXEDLOAD) {
+            throw new IllegalArgumentException("The fixed laod must be >=  " + MIN_FIXEDLOAD);
         }
         this.fixedLoad = fixedLoad;
     }
@@ -57,8 +58,8 @@ public final class LoadParams implements LoadParamsMBean {
      */
     @Override
     public void setRandomLoad(int randomLoad) throws IllegalArgumentException {
-        if (randomLoad < minRandomLoad) {
-            throw new IllegalArgumentException("The random laod must be >=  " + minRandomLoad);
+        if (randomLoad < MIN_RANDOMLOAD) {
+            throw new IllegalArgumentException("The random laod must be >=  " + MIN_RANDOMLOAD);
         }
         this.randomLoad = randomLoad;
     }
@@ -80,7 +81,6 @@ public final class LoadParams implements LoadParamsMBean {
     public int getRandomLoad() {
         return randomLoad;
     }
-    private static final Logger LOG = Logger.getLogger(LoadParams.class.getName());
 }
 
 

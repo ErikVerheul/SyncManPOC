@@ -10,9 +10,11 @@ import java.util.logging.Logger;
 /**
  * For an explanation of the suspend / resume implementation see
  * http://java.sun.com/javase/6/docs/technotes/guides/concurrency/threadPrimitiveDeprecation.html
- * @author erik
+ * 
+ * @author Erik Verheul
  */
 class MessageLoop implements Runnable {
+    private static final Logger LOG = Logger.getLogger(MessageLoop.class.getName());
 
     private final int region;
     private boolean suspended = false;
@@ -74,7 +76,7 @@ class MessageLoop implements Runnable {
          */
         try {
             // Sleep according to priority (0= highest)
-            long prioritySleepTime = Syncman2POC.aantalRegios *
+            long prioritySleepTime = Syncman2POC.NR_OF_REGIONS *
                     interval.getInterval() *
                     priorities.getPriority(region);
             Thread.sleep(prioritySleepTime);
@@ -127,5 +129,4 @@ class MessageLoop implements Runnable {
             Utilities.threadMessage(out);
         }
     }
-    private static final Logger LOG = Logger.getLogger(MessageLoop.class.getName());
 }
