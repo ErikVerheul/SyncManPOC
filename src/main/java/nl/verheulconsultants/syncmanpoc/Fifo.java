@@ -31,10 +31,9 @@ public class Fifo implements FifoMBean {
     /**
      *
      * @param size
-     * @throws IllegalArgumentException
      */
     @Override
-    public void setSize(int size) throws IllegalArgumentException {
+    public void setSize(int size) {
         outputQueue.setSize(size);
     }
 

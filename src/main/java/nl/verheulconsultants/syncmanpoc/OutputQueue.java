@@ -46,9 +46,8 @@ public class OutputQueue {
     /**
      *
      * @param newSize
-     * @throws IllegalArgumentException
      */
-    public void setSize(int newSize) throws IllegalArgumentException {
+    public void setSize(int newSize) {
         if (newSize <= 0 || newSize > MAX_SIZE) {
             throw new IllegalArgumentException("Output lines range must be >= 1 and <= " + MAX_SIZE);
         }

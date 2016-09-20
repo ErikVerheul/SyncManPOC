@@ -42,10 +42,9 @@ public class Priority implements PriorityMBean {
      *
      * @param region
      * @param prio
-     * @throws IllegalArgumentException
      */
     @Override
-    public void setPriority(int region, int prio) throws IllegalArgumentException {
+    public void setPriority(int region, int prio) {
         if (region < 1 || region > Syncman2POC.NR_OF_REGIONS) {
             throw new IllegalArgumentException("Region range must be >= 1 and <= " + Syncman2POC.NR_OF_REGIONS);
         }

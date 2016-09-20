@@ -32,10 +32,9 @@ public class LooplistWrapper implements LooplistWrapperMBean {
     /**
      *
      * @param region
-     * @throws IllegalArgumentException
      */
     @Override
-    public void suspendRegion(int region) throws IllegalArgumentException {
+    public void suspendRegion(int region) {
         if (region < 1 || region > loops.size() || loops.get(region - 1).isSuspended()) {
             throw new IllegalArgumentException("Region range must be active and >= 1 and <= " + loops.size());
         }
@@ -45,10 +44,9 @@ public class LooplistWrapper implements LooplistWrapperMBean {
     /**
      *
      * @param region
-     * @throws IllegalArgumentException
      */
     @Override
-    public void resumeRegion(int region) throws IllegalArgumentException {
+    public void resumeRegion(int region) {
         if (region < 1 || region > loops.size() || !loops.get(region - 1).isSuspended()) {
             throw new IllegalArgumentException("Region range must be suspended and >= 1 and <= " + loops.size());
         }

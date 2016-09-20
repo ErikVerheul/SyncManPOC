@@ -41,10 +41,9 @@ public final class LoadParams implements LoadParamsMBean {
     /**
      *
      * @param fixedLoad
-     * @throws IllegalArgumentException
      */
     @Override
-    public void setFixedLoad(int fixedLoad) throws IllegalArgumentException {
+    public void setFixedLoad(int fixedLoad) {
         if (fixedLoad < MIN_FIXEDLOAD) {
             throw new IllegalArgumentException("The fixed laod must be >=  " + MIN_FIXEDLOAD);
         }
@@ -54,10 +53,9 @@ public final class LoadParams implements LoadParamsMBean {
     /**
      *
      * @param randomLoad
-     * @throws IllegalArgumentException
      */
     @Override
-    public void setRandomLoad(int randomLoad) throws IllegalArgumentException {
+    public void setRandomLoad(int randomLoad) {
         if (randomLoad < MIN_RANDOMLOAD) {
             throw new IllegalArgumentException("The random laod must be >=  " + MIN_RANDOMLOAD);
         }

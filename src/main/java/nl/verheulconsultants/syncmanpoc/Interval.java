@@ -42,10 +42,9 @@ public class Interval implements IntervalMBean {
     /**
      *
      * @param waitMilis
-     * @throws IllegalArgumentException
      */
     @Override
-    public void setInterval(long waitMilis) throws IllegalArgumentException {
+    public void setInterval(long waitMilis) {
         if (waitMilis < MIN_INTERVAL || waitMilis > MAX_INTERVAL) {
             throw new IllegalArgumentException("Interval range must be >= " + MIN_INTERVAL + " and <= " + MAX_INTERVAL);
         }
